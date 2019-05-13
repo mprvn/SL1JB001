@@ -1,0 +1,39 @@
+<div id='controls'>
+  <button id='play'
+          class='fa fa-play btn btn-circle btn-lg'
+          ngClass='toggle? '
+          title='play'
+          (click)='play()'></button>
+  <button id='pause'
+          class='fa fa-pause btn btn-circle btn-lg'
+          title='pause'
+          (click)='pause()'></button>       
+  <button id='volumeupbtn'
+          class='fa fa-plus btn btn-circle btn-lg'
+          title='Volume UP'
+          (click)='volumeUp()'></button>
+  <button id='volumedownbtn'
+          class='fa fa-minus btn btn-circle btn-lg'
+          title='Volume Down'
+          (click)='volumeDown()'></button> 
+  <button id='volumeRepeatbtn'
+          class='fa fa-repeat btn btn-circle btn-lg'
+          title='play'
+          (click)='repeat()'></button> 
+  <button id='thumbsbtn'
+          class='fa fa-thumbs-up btn btn-circle btn-lg'
+          title='play'
+          onClick=''></button> 
+          <button id='volumedownbtn'
+          class='fa fa-thumbs-down btn btn-circle btn-lg'
+          title='play'
+          onClick=''></button>        
+</div>
+<div>
+  <progress id="video_progress_bar" #videoTracker
+            style="width:100%" max="100" value="10">
+          <div> class="progress-bar">
+            <span>progress 80%</span>
+          </div>
+          </progress>
+</div>
