@@ -22,7 +22,7 @@ export class ControlsComponent implements OnInit,AfterViewInit  {
     this.player = playerRef;
     console.log('called' );
     this.player.nativeElement.volume = this.volume;
-    this.player.nativeElement.
+    
   }
   public play(){
     this.player.nativeElement.play();
