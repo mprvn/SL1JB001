@@ -1,0 +1,25 @@
+<p>
+  add-new-video works!
+</p>
+
+
+<table style="width:100%">
+  <tr>
+    <th>S.No</th>
+    <th>Tittle</th>
+    <th>Url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let video of playlist" >
+    <td>{{ video.num }}</td>
+    <td>{{ video.title }} </td>
+   
+
+    <td>
+    <button (click)="deletePolicy(policy.id)">Delete</button>
+    <button (click)="updatePolicy(policy)">Update</button>
+    </td>
+  </tr>
+</table>
