@@ -6,18 +6,18 @@ import { Component, OnInit, Input, ViewChild, ElementRef} from '@angular/core';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  @ViewChild('playerelement') palyerRef:ElementRef;
-  @Input() public videoSource:String;
+  @ViewChild('playerelement') palyerRef: ElementRef;
+  @Input() public videoSource: string;
   public player: any;
   constructor() { }
 
   ngOnInit() {
     this.videoSource = 'https://www.w3schools.com/tags/movie.mp4';
-   
+
   }
 
-  public getplayerInstance(){
-  return this.palyerRef;
+  public getplayerInstance() {
+    return this.palyerRef;
   }
-  
+
 }

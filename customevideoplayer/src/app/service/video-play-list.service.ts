@@ -13,7 +13,7 @@ export class VideoPlayListService {
   }
 
   public getvideo(videoId: number) {
-       return this.httpClient.get(`${this.SERVER_URL + 'video'}/${videoId}`);
+       return this.httpClient.get(`${this.SERVER_URL + 'playlist'}/${videoId}`);
   }
   public createVideo(video: {id: number,
                                 title: string,
@@ -21,14 +21,14 @@ export class VideoPlayListService {
                                 status: string,
                                 approved: number,
                                 likes: number,
-                                unlike: number
-                                currentStatus: string
-                                exitplayprogress: string }) {
-      return this.httpClient.post(`${this.SERVER_URL + 'video'}`, video)
+                                unlike: number,
+                                currentStatus: string,
+                                exitplayprogress: number }) {
+      return this.httpClient.post(`${this.SERVER_URL + 'playlist'}`, video)
   }
 
   public deleteVideo(videoId: number) {
-      return this.httpClient.delete(`${this.SERVER_URL + 'policies'}/${videoId}`)
+      return this.httpClient.delete(`${this.SERVER_URL + 'playlist'}/${videoId}`)
   }
   public updateVideo(video: {id: number,
                                 title: string,
@@ -36,9 +36,9 @@ export class VideoPlayListService {
                                 status: string,
                                 approved: number,
                                 likes: number,
-                                unlike: number
-                                currentStatus: string
-                                exitplayprogress: string }) {
-      return this.httpClient.put(`${this.SERVER_URL + 'policies'}/${video.id}`, video)
+                                unlike: number,
+                                currentStatus: string,
+                                exitplayprogress: number }) {
+      return this.httpClient.put(`${this.SERVER_URL + 'playlist'}/${video.id}`, video)
   }
 }

@@ -1,3 +1,20 @@
 <p>
   playlist works!
 </p>
+<div *ngFor="let video of playlist" style="border:1px solid grey; margin-bottom: 2px;">
+    <div>
+      <a [href]="video.url">
+        <h5>{{video.title}}</h5>
+      </a>
+      <div calss="row">
+            <span>
+               {{video.likes}}
+                <i class="fa fa-thumbs-up"></i>                
+            </span>
+             <span>
+                {{video.unlike}}
+                <i class="fa fa-thumbs-down"></i>                
+            </span>                
+      </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@ export class AwesomePlayerComponent implements OnInit,AfterViewInit  {
 
   @ViewChild(PlayerComponent) playerRef: PlayerComponent;
   @ViewChild(ControlsComponent) controlsRef: ControlsComponent;
+  private toggle = false;
   constructor() { }
 
   ngOnInit() {
@@ -21,5 +22,8 @@ export class AwesomePlayerComponent implements OnInit,AfterViewInit  {
     this.controlsRef.playerRef(this.playerRef.getplayerInstance());
     console.log(this.playerRef.getplayerInstance());
     console.log('player instance \n '+this.controlsRef.player);
+  }
+  public togglePotraitMode() {
+   this.toggle = !this.toggle  ;
   }
 }

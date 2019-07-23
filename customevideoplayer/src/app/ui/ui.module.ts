@@ -7,6 +7,9 @@ import { AwesomePlayerComponent } from './awesome-player/awesome-player.componen
 import { PlayerComponent } from './player/player.component';
 import { ControlsComponent } from './controls/controls.component';
 import { PlaylistComponent } from './playlist/playlist.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { FormsModule } from '@angular/forms';
+
 import { AddNewVideoComponent } from './add-new-video/add-new-video.component';
 import { VideoPlayListService } from '../service/video-play-list.service';
 
@@ -23,7 +26,9 @@ import { VideoPlayListService } from '../service/video-play-list.service';
        ],
 
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
   VideoPlayListService

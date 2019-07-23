@@ -1,11 +1,15 @@
-<div>
+<div class="row">
+    
+  <div class="col-md-8" [ngClass]="toggle ? 'col-md-12' : 'col-md-8'">
+      <button class="mb-2" (click)="togglePotraitMode()">potrait mode</button>
   <div>
     <app-player></app-player>
   </div>
-  <div>
+  <div >
     <app-controls ></app-controls>
   </div>
-  <div>
+  </div>
+  <div class="col-md-4" [ngClass]="toggle ? 'col-md-12' : 'col-md-4'">
     <app-playlist></app-playlist>
   </div>
 </div>

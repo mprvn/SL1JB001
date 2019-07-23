@@ -6,8 +6,8 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '
   styleUrls: ['./controls.component.scss']
 })
 export class ControlsComponent implements OnInit,AfterViewInit  {
-  public volume:number;
-  public static stepper:number = 0.1;
+  public volume: number;
+  public readonly stepper:number = 0.1;
   constructor() {
     this.volume = 0.1;
    }
@@ -16,9 +16,9 @@ export class ControlsComponent implements OnInit,AfterViewInit  {
   ngOnInit() {
 
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
    }
-  public playerRef(playerRef:ElementRef) {
+  public playerRef(playerRef: ElementRef) {
     this.player = playerRef;
     console.log('called' );
     this.player.nativeElement.volume = this.volume;
@@ -34,7 +34,7 @@ export class ControlsComponent implements OnInit,AfterViewInit  {
    public volumeUp() {
      console.log(this.player.nativeElement.volume);
      if (this.volume < 0.9) {
-       this.volume = this.volume +  ControlsComponent.stepper;
+       this.volume = this.volume +  this.stepper;
        this.player.nativeElement.volume = this.volume;
        console.log(this.player.nativeElement.volume);
      }
@@ -42,7 +42,7 @@ export class ControlsComponent implements OnInit,AfterViewInit  {
    public volumeDown() {
     console.log(this.player.nativeElement.volume);
     if (this.volume > 0) {
-      this.volume = this.volume -  ControlsComponent.stepper;
+      this.volume = this.volume -  this.stepper;
       this.player.nativeElement.volume = this.volume;
       console.log(this.player.nativeElement.volume);
     }

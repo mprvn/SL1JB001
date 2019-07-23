@@ -5,14 +5,13 @@ import { AddNewVideoComponent } from './ui/add-new-video/add-new-video.component
 
 const routes: Routes = [
     {
-        path: '',
-        redirectTo: '/player',
-         pathMatch: 'full'
+    path: '',
+    redirectTo: '/player',
+    pathMatch: 'full'
     },
     {
     path: 'addvideo',
-    component: AddNewVideoComponent,
-    pathMatch: 'full'
+    component: AddNewVideoComponent
     },
     {
     path: 'player',
