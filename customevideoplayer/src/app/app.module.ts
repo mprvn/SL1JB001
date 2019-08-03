@@ -8,6 +8,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './service/data.service';
 
 import { VideoPlayListService } from './service/video-play-list.service';
+import { FeaturestateService } from './service/featurestate.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { VideoPlayListService } from './service/video-play-list.service';
   ],
   providers: [
       VideoPlayListService,
+      FeaturestateService,
       HttpClientModule
   ],
   bootstrap: [AppComponent]
