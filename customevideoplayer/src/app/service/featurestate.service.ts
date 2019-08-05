@@ -4,19 +4,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FeaturestateService {
- const featureStates:any = {};
+  featureStates:any = {};
   constructor() {
    }
 
-   const newStateFeature = (component) => {
+    newStateFeature = (component: any) => {
     const state = {};
     this.featureStates[component] = state ;
     return state;
   }
 
-   retrun {
-     get: (component) => {
-       return this.featureStates[component] || newStateFeature(component);
-     }
-   }
+  get(component: any){
+  return this.featureStates[component] || this.newStateFeature(component);
+  }
 }

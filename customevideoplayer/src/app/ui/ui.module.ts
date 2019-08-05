@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AddNewVideoComponent } from './add-new-video/add-new-video.component';
 import { VideoPlayListService } from '../service/video-play-list.service';
+import { FeaturestateService } from '../service/featurestate.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { VideoPlayListService } from '../service/video-play-list.service';
     FormsModule
   ],
   providers: [
-  VideoPlayListService
+  VideoPlayListService,
+  FeaturestateService
   ]
 ,  exports: [
     LayoutComponent,
