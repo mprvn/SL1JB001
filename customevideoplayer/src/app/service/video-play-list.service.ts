@@ -4,7 +4,7 @@ import { HttpClientModule , HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class VideoPlayListService {
+export class 0 {
   SERVER_URL = 'http://localhost:4200/api/';
   constructor(private httpClient: HttpClient) { }
 
