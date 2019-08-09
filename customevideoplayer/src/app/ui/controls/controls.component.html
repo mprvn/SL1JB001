@@ -31,8 +31,9 @@
           onClick=''></button>        
 </div>
 <div>
+progress                 {{progress}}
   <progress id="video_progress_bar" #videoTracker
-            style="width:100%" max="100" value="10">
+            style="width:100%" max="100" value="{{progress}}">
           <div> class="progress-bar">
             <span>progress 80%</span>
           </div>

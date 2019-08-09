@@ -10,6 +10,7 @@ export class ControlsComponent implements OnInit,AfterViewInit, AfterViewChecked
   public readonly stepper:number = 0.1;
   private  videoPlay = true;
   private  videoPause = false;
+  private progress = 0;
   @Input('playerelement') player: ElementRef;
  
   constructor() {
@@ -26,13 +27,19 @@ export class ControlsComponent implements OnInit,AfterViewInit, AfterViewChecked
     this.player.nativeElement.onended =() =>{
       this.resetPlayNPauseStyles();
     };
-    this.player.nativeElement.on('progress',()=>{
+    this.player.nativeElement.ontimeupdate = ()=>{
       var percentage = Math.floor((100 / this.player.nativeElement.duration) *
       this.player.nativeElement.currentTime);
-      console.log(percentage + '%');
+      if(percentage) {      this.progress = (percentage |0); }
+
+      console.log(percentage  + '%');
      // progressBar.value = percentage;
-    })
+    };
   } 
+
+  public setProgress (playerRef: ElementRef){
+
+  }
    public resetPlayNPauseStyles(){
     this.videoPlay = true;
     this.videoPause = false;
