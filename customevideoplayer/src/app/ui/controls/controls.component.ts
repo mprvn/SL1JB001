@@ -75,7 +75,7 @@ export class ControlsComponent implements OnInit,AfterViewInit, AfterViewChecked
   ngAfterViewChecked(): void {
     const videoPlayer =document.getElementById('awesome_player');
     this.awesomePlayer = this.featurestateService.get("awesomeplayer");
-    this.like = this.awesomePlayer.selectedPlay.likes;
+   
   }
  
   /**
