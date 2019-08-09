@@ -10,18 +10,27 @@ import { FeaturestateService } from 'src/app/service/featurestate.service';
 })
 export class PlaylistComponent implements OnInit {
 
-  private playlist: any[] = [] ;
+  private playlist: any[] ;
+  private awesomePlayer: any = {};
   constructor(private VideoPlayListService: VideoPlayListService,
     private featurestateService: FeaturestateService 
-    ) { }
+    ) {    }
 
   ngOnInit() {
             
-      //   console.log("got data "+this.playlist);
-      
-     // this.playlist = this.featurestateService.get("awesomeplayer").playlist ;
-      console.log("got data "+this.playlist);
-      this.playlist = this.featurestateService.get("awesomeplayer").playlist;
+    this.VideoPlayListService.getPlaylist().subscribe(( data: any[]) => {
+      this.featurestateService.get("awesomeplayer").playlist = data;
+      this.awesomePlayer.playlist = this.featurestateService.get("awesomeplayer").playlist;
+      console.log( this.featurestateService.get("awesomeplayer").playlist);
+   });
+     console.log("got data "+this.playlist);
+     
     }
 
+    public selectToPlay(id: number){
+      this.featurestateService.get('awesomeplayer').selectedPlay = this.awesomePlayer.playlist.filter( (video) =>{
+       return video.id == id;
+      });
+      console.log('this.featurestateService.get(awesomeplayer).selectedPlay' + this.featurestateService.get('awesomeplayer').selectedPlay);
+    }
 }

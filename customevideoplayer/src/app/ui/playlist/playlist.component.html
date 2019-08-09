@@ -1,9 +1,10 @@
 <p>
   playlist works!
 </p>
-<div *ngFor="let video of playlist" style="border:1px solid grey; margin-bottom: 2px;">
+<div >
+  <div  *ngFor="let video of awesomePlayer.playlist" style="border:1px solid grey; margin-bottom: 2px;">
     <div>
-      <a [href]="video.url">
+    <a href="" (click)="selectToPlay(video.id)">
         <h5>{{video.title}}</h5>
       </a>
       <div calss="row">
@@ -17,4 +18,8 @@
             </span>                
       </div>
     </div>
+  </div>
 </div>
+<!-- <div *ngIf="this.awesomePlayer.dataLoader">
+  <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+</div> -->

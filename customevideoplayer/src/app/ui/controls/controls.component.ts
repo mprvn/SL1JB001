@@ -1,34 +1,83 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 
 @Component({
   selector: 'app-controls',
   templateUrl: './controls.component.html',
   styleUrls: ['./controls.component.scss']
 })
-export class ControlsComponent implements OnInit,AfterViewInit  {
+export class ControlsComponent implements OnInit,AfterViewInit, AfterViewChecked   {
   public volume: number;
   public readonly stepper:number = 0.1;
+  private  videoPlay = true;
+  private  videoPause = false;
+  @Input('playerelement') player: ElementRef;
+ 
   constructor() {
     this.volume = 0.1;
-   }
-
-   @Input() player: ElementRef;
-  ngOnInit() {
-
-  }
-  ngAfterViewInit() {
-   }
-  public playerRef(playerRef: ElementRef) {
+        }
+/**
+    * 
+    * @param playerRef player Instance thru refrence
+    */
+   public playerRef(playerRef: ElementRef) {
     this.player = playerRef;
     console.log('called' );
     this.player.nativeElement.volume = this.volume;
+    this.player.nativeElement.onended =() =>{
+      this.resetPlayNPauseStyles();
+    };
+    this.player.nativeElement.on('progress',()=>{
+      var percentage = Math.floor((100 / this.player.nativeElement.duration) *
+      this.player.nativeElement.currentTime);
+      console.log(percentage + '%');
+     // progressBar.value = percentage;
+    })
+  } 
+   public resetPlayNPauseStyles(){
+    this.videoPlay = true;
+    this.videoPause = false;
+   } 
 
+
+  ngOnInit() {
+    //this.player.nativeElement.on('ended',this.resetPlayNPauseStyles() );
+    const videoPlayer =document.getElementById('awesome_player');
+    
   }
+ /**
+  * effects the css value by toggeling the booleane value
+  */
+  public tooglePlay(){
+    this.videoPlay = !this.videoPlay;
+  }
+
+ /**
+  * effects the css value by toggeling the booleane value
+  */
+  public tooglePause(){
+    this.videoPause =  !this.videoPause;
+  }
+  ngAfterViewInit() {
+    // this.playerElement.nativeElement.onended(this.resetPlayNPauseStyles());
+   }
+   
+
+  ngAfterViewChecked(): void {
+   //this.playerElement.nativeElement.on('ended',this.resetPlayNPauseStyles());
+  }
+ 
+  /**
+   * play toggles the css style and plays the video
+   */
   public play() {
     this.player.nativeElement.play();
+    this.tooglePlay();
+    this.tooglePause();
    }
    public pause() {
     this.player.nativeElement.pause();
+    this.tooglePlay();
+    this.tooglePause();
    }
 
    public volumeUp() {
@@ -51,5 +100,7 @@ export class ControlsComponent implements OnInit,AfterViewInit  {
     this.player.nativeElement.load();
     this.player.nativeElement.play();
    }
-
+   public like(likes:number, id : number ){
+    
+   } 
 }

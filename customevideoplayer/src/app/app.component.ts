@@ -12,14 +12,12 @@ export class AppComponent {
   title = 'customevideoplayer';
   constructor(private featureStateService: FeaturestateService,
     private videoPlayListService: VideoPlayListService) { 
+      this.featureStateService.get("awesomeplayer").dataLoader = true;
+      
+  
   }
   
   ngOnInit() {
           // this.featureStateService.get("awesomeplayer").selectedPlaylist = {};
-     this.videoPlayListService.getPlaylist().subscribe(( data: any[]) => {
-      console.log(data);
-      this.featureStateService.get("awesomeplayer").playlist = data;
-      console.log( this.featureStateService.get("awesomeplayer").playlist);
-   });
-     }
+         }
 }
