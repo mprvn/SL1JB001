@@ -2,9 +2,9 @@
   playlist works!
 </p>
 <div >
-  <div  *ngFor="let video of awesomePlayer.playlist" style="border:1px solid grey; margin-bottom: 2px;">
-    <div>
-    <a href="" (click)="selectToPlay(video.id)">
+  <div  *ngFor="let video of awesomePlayer.playlist" >
+    <div *ngIf="video.approved" style="border:1px solid grey; margin-bottom: 2px;">
+     <a href="" (click)="selectToPlay(video.id)" >
         <h5>{{video.title}}</h5>
       </a>
       <div calss="row">

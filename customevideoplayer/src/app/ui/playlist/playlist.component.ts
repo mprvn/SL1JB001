@@ -16,13 +16,13 @@ export class PlaylistComponent implements OnInit {
     private featurestateService: FeaturestateService 
     ) {    }
 
-  ngOnInit() {
-            
+  ngOnInit() {            
     this.VideoPlayListService.getPlaylist().subscribe(( data: any[]) => {
       this.featurestateService.get("awesomeplayer").playlist = data;
       this.awesomePlayer.playlist = this.featurestateService.get("awesomeplayer").playlist;
       console.log( this.featurestateService.get("awesomeplayer").playlist);
-   });
+      this.featurestateService.get("awesomeplayer").selectedPlay = this.awesomePlayer.playlist[0];
+    });
      console.log("got data "+this.playlist);
      
     }

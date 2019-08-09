@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { FeaturestateService } from 'src/app/service/featurestate.service';
 
 @Component({
   selector: 'app-controls',
@@ -11,11 +12,13 @@ export class ControlsComponent implements OnInit,AfterViewInit, AfterViewChecked
   private  videoPlay = true;
   private  videoPause = false;
   private progress = 0;
+  private awesomePlayer: any = {};
   @Input('playerelement') player: ElementRef;
  
-  constructor() {
+  constructor(private featurestateService: FeaturestateService) {
     this.volume = 0.1;
-        }
+    this.progress = 0;
+   }
 /**
     * 
     * @param playerRef player Instance thru refrence
@@ -43,13 +46,13 @@ export class ControlsComponent implements OnInit,AfterViewInit, AfterViewChecked
    public resetPlayNPauseStyles(){
     this.videoPlay = true;
     this.videoPause = false;
+    this.progress = 0;
    } 
 
 
   ngOnInit() {
     //this.player.nativeElement.on('ended',this.resetPlayNPauseStyles() );
-    const videoPlayer =document.getElementById('awesome_player');
-    
+   
   }
  /**
   * effects the css value by toggeling the booleane value
@@ -65,12 +68,14 @@ export class ControlsComponent implements OnInit,AfterViewInit, AfterViewChecked
     this.videoPause =  !this.videoPause;
   }
   ngAfterViewInit() {
-    // this.playerElement.nativeElement.onended(this.resetPlayNPauseStyles());
+    
    }
    
 
   ngAfterViewChecked(): void {
-   //this.playerElement.nativeElement.on('ended',this.resetPlayNPauseStyles());
+    const videoPlayer =document.getElementById('awesome_player');
+    this.awesomePlayer = this.featurestateService.get("awesomeplayer");
+    this.like = this.awesomePlayer.selectedPlay.likes;
   }
  
   /**
@@ -108,6 +113,6 @@ export class ControlsComponent implements OnInit,AfterViewInit, AfterViewChecked
     this.player.nativeElement.play();
    }
    public like(likes:number, id : number ){
-    
-   } 
+    this.awesomePlayer.currentItem  
+   }  
 }
