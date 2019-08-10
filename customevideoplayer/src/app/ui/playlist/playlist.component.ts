@@ -49,6 +49,11 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
     public setControlCompRef(controlsRef: ControlsComponent){
       this.controlsRef = controlsRef;
     }
+    
+    /**
+     * 
+     * @param id of current playing video
+     */
     public selectToPlay(id: number){
       this.featurestateService.get('awesomeplayer').selectedPlay =
        this.awesomePlayer.playlist.filter( (video) =>{
@@ -68,13 +73,17 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
       let copyOfVideo = {...this.getCurrentVideo (id)};
       copyOfVideo.likes = likes;
      this.awesomePlayer.playlist[id-1] = copyOfVideo;
-    //  this.changeDetection.detectChanges();
+     this.VideoPlayListService.updateVideo(copyOfVideo);
     }
+
+    /**
+     * 
+     * @param id currnet playing video
+     */
   public getCurrentVideo (id:number){
     const currentVideo =  this.awesomePlayer.playlist.filter( (video) =>{
       return video.id == id;
-     });
-    
+     });    
      return currentVideo[0];
   }
 
@@ -84,10 +93,11 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
  * @param unlike number of unlikes
  */
   public updateUnLikes(id:number , unlike: number){
-    console.log("unlike " +unlike + "id "+id );
+    //console.log("unlike " +unlike + "id "+id );
     let copyOfVideo = {...this.getCurrentVideo (id)};
     copyOfVideo.unlike = unlike;
     this.awesomePlayer.playlist[id-1] = copyOfVideo;
+    this.VideoPlayListService.updateVideo(copyOfVideo);
     
   }
 
