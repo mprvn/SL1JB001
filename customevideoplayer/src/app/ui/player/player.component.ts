@@ -16,7 +16,8 @@ export class PlayerComponent implements OnInit {
   constructor() { }
   
   ngOnInit() {
-    this.videoSource = 'https://www.w3schools.com/tags/movie.mp4';
+    //this.videoSource = 'https://www.w3schools.com/tags/movie.mp4';
+    //this.videoSource =""
   }
 
   public getplayerInstance() {
@@ -25,7 +26,11 @@ export class PlayerComponent implements OnInit {
 /**
  * sets playying vedio sources
  */
-  public setVideoSource (video: any){
-    this.videoSource = video.url;
+  public setVideoSource (videoObject: any){
+    this.videoSource = videoObject.url;
+    const playerInstace : HTMLVideoElement  = this.palyerRef.nativeElement;
+    playerInstace.load(); 
+   // playerInstace.play()
+    console.log("called");
   }
-} 
+} ``

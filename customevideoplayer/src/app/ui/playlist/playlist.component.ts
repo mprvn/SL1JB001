@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit,  } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef   } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideoPlayListService } from 'src/app/service/video-play-list.service';
 import { FeaturestateService } from 'src/app/service/featurestate.service';
@@ -18,7 +18,8 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
   private playlist: any[] ;
   private awesomePlayer: any = {};
   constructor(private VideoPlayListService: VideoPlayListService,
-    private featurestateService: FeaturestateService 
+    private featurestateService: FeaturestateService ,
+    private changeDetection: ChangeDetectorRef
     ) {    }
 
   ngOnInit() {            
@@ -49,10 +50,13 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
       this.controlsRef = controlsRef;
     }
     public selectToPlay(id: number){
-      this.featurestateService.get('awesomeplayer').selectedPlay = this.awesomePlayer.playlist.filter( (video) =>{
+      this.featurestateService.get('awesomeplayer').selectedPlay =
+       this.awesomePlayer.playlist.filter( (video) =>{
        return video.id == id;
       });
-      console.log('this.featurestateService.get(awesomeplayer).selectedPlay' + this.featurestateService.get('awesomeplayer').selectedPlay);
+      this.playerCompRef.setVideoSource(this.featurestateService.get('awesomeplayer').selectedPlay[0]);
+      this.controlsRef.setCurrentItem(this.featurestateService.get('awesomeplayer').selectedPlay[0]);
+      this.controlsRef.resetPlayNPauseStyles();
     }
 
     /**
@@ -61,8 +65,19 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
      * @param likes number of likes 
      */
     public updateLikes(id:number , likes: number){
-        this.awesomePlayer.playlist[id].likes = likes;
+      let copyOfVideo = {...this.getCurrentVideo (id)};
+      copyOfVideo.likes = likes;
+     this.awesomePlayer.playlist[id-1] = copyOfVideo;
+    //  this.changeDetection.detectChanges();
     }
+  public getCurrentVideo (id:number){
+    const currentVideo =  this.awesomePlayer.playlist.filter( (video) =>{
+      return video.id == id;
+     });
+    
+     return currentVideo[0];
+  }
+
 /**
  * 
  * @param id  Current play item id 
@@ -70,6 +85,13 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
  */
   public updateUnLikes(id:number , unlike: number){
     console.log("unlike " +unlike + "id "+id );
-      this.awesomePlayer.playlist[id].unlike = unlike;
+    let copyOfVideo = {...this.getCurrentVideo (id)};
+    copyOfVideo.unlike = unlike;
+    this.awesomePlayer.playlist[id-1] = copyOfVideo;
+    
+  }
+
+  trackElement(index: number, element: any) {
+    return element ? element.id : null
   }
 }

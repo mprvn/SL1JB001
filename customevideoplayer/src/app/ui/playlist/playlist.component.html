@@ -2,9 +2,9 @@
   playlist works!
 </p>
 <div>
-  <div  *ngFor="let video of awesomePlayer.playlist; let index = index" >
+  <div  *ngFor="let video of awesomePlayer.playlist; let index = index; trackBy: trackElement" >
     <div *ngIf="video.approved"  placeholder="video" style="border:1px solid grey; margin-bottom: 2px;">
-        <a href="" (click)="selectToPlay(awesomePlayer.playlist[index].id)" >
+        <a [routerLink]="" (click)="selectToPlay(awesomePlayer.playlist[index].id)" >
         <h5>{{awesomePlayer.playlist[index].title}}</h5>
        </a>
         <div calss="row">
