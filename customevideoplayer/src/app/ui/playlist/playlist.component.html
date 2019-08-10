@@ -1,22 +1,22 @@
 <p>
   playlist works!
 </p>
-<div >
-  <div  *ngFor="let video of awesomePlayer.playlist" >
-    <div *ngIf="video.approved" style="border:1px solid grey; margin-bottom: 2px;">
-     <a href="" (click)="selectToPlay(video.id)" >
-        <h5>{{video.title}}</h5>
-      </a>
-      <div calss="row">
+<div>
+  <div  *ngFor="let video of awesomePlayer.playlist; let index = index" >
+    <div *ngIf="video.approved"  placeholder="video" style="border:1px solid grey; margin-bottom: 2px;">
+        <a href="" (click)="selectToPlay(awesomePlayer.playlist[index].id)" >
+        <h5>{{awesomePlayer.playlist[index].title}}</h5>
+       </a>
+        <div calss="row">
             <span>
-               {{video.likes}}
+               {{awesomePlayer.playlist[index].likes}}
                 <i class="fa fa-thumbs-up"></i>                
             </span>
              <span>
-                {{video.unlike}}
+                {{awesomePlayer.playlist[index].unlike}}
                 <i class="fa fa-thumbs-down"></i>                
             </span>                
-      </div>
+        </div>
     </div>
   </div>
 </div>

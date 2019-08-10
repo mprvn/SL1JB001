@@ -4,6 +4,7 @@ import { PlayerComponent } from 'src/app/ui/player/player.component';
 import { ControlsComponent } from 'src/app/ui/controls/controls.component';
 import { FeaturestateService } from  'src/app/service/featurestate.service';
 import { VideoPlayListService } from 'src/app/service/video-play-list.service' ;
+import { PlaylistComponent } from '../playlist/playlist.component';
 
 @Component({
   selector: 'app-awesome-player',
@@ -15,9 +16,10 @@ export class AwesomePlayerComponent implements OnInit,AfterViewInit  {
 
   @ViewChild(PlayerComponent) playerRef: PlayerComponent;
   @ViewChild(ControlsComponent) controlsRef: ControlsComponent;
+  @ViewChild(PlaylistComponent) playlistRef: PlaylistComponent;
   private toggle = false;
   private awesomePlayer;
-  prib
+  
   constructor(private featureStateService: FeaturestateService,
     private videoPlayListService: VideoPlayListService) { 
      }
@@ -30,6 +32,9 @@ export class AwesomePlayerComponent implements OnInit,AfterViewInit  {
   ngAfterViewInit() {
     //console.log(this.controlsRef);
     this.controlsRef.playerRef(this.playerRef.getplayerInstance());
+    this.playlistRef.setControlCompRef(this.controlsRef);
+    this.playlistRef.setPLayerCompRef(this.playerRef);
+    this.controlsRef.setPlaylist(this.playlistRef);
     //console.log(this.playerRef.getplayerInstance());
     //console.log('player instance \n '+this.controlsRef.player);
   }

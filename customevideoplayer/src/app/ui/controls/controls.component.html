@@ -21,14 +21,14 @@
           class='fa fa-repeat btn btn-circle btn-lg btn-blue'
           title='play'
           (click)='repeat()'></button> 
-  <button id='thumbsbtn'
+  {{like}}<button id='thumbsbtn'
           class='fa fa-thumbs-up btn btn-circle btn-lg btn-blue'
           title='like'
-          onClick=''></button> 
-          <button id='thumsdownbtn'
+          (click)='changeLikes()'></button> 
+  {{unlike}}  <button id='thumsdownbtn'
           class='fa fa-thumbs-down btn btn-circle btn-lg btn-green'
           title='unlike'
-          onClick=''></button>        
+          (click)='changeUnLikes()'></button>        
 </div>
 <div>
 
