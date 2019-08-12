@@ -22,20 +22,28 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
     private changeDetection: ChangeDetectorRef
     ) {    }
 
-  ngOnInit() {            
-    this.VideoPlayListService.getPlaylist().subscribe(( data: any[]) => {
-      this.featurestateService.get("awesomeplayer").playlist = data;
-      this.awesomePlayer.playlist = this.featurestateService.get("awesomeplayer").playlist;
-      console.log( this.featurestateService.get("awesomeplayer").playlist);
-      this.featurestateService.get("awesomeplayer").selectedPlay = this.awesomePlayer.playlist[0];
-      this.playerCompRef.setVideoSource( this.featurestateService.get("awesomeplayer").selectedPlay);
-      this.controlsRef.setCurrentItem( this.featurestateService.get("awesomeplayer").selectedPlay);
-    }); 
-         
+  ngOnInit() { 
+      if(this.featurestateService.get("awesomeplayer").playlist){
+        this.awesomePlayer.playlist = this.featurestateService.get("awesomeplayer").playlist;
+        this.featurestateService.get("awesomeplayer").selectedPlay = this.awesomePlayer.playlist[0];
+        this.updateVideoSource(this.featurestateService.get("awesomeplayer").selectedPlay);  
+      } else{          
+        this.VideoPlayListService.getPlaylist().subscribe(( data: any[]) => {
+          this.featurestateService.get("awesomeplayer").playlist = data;
+          this.awesomePlayer.playlist = this.featurestateService.get("awesomeplayer").playlist;
+          this.featurestateService.get("awesomeplayer").selectedPlay = this.awesomePlayer.playlist[0];
+          this.updateVideoSource(this.featurestateService.get("awesomeplayer").selectedPlay);
+        }); 
+      }   
     }
 
     ngAfterViewInit(): void {
        
+    }
+
+    public updateVideoSource(video : any){
+      this.playerCompRef.setVideoSource( video);
+      this.controlsRef.setCurrentItem(video);
     }
    /**
     * @param payerComponent player component reference
@@ -72,7 +80,7 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
     public updateLikes(id:number , likes: number){
       let copyOfVideo = {...this.getCurrentVideo (id)};
       copyOfVideo.likes = likes;
-     this.awesomePlayer.playlist[id-1] = copyOfVideo;
+     this.awesomePlayer.playlist[id] = copyOfVideo;
      this.VideoPlayListService.updateVideo(copyOfVideo);
     }
 
@@ -96,7 +104,7 @@ export class PlaylistComponent implements OnInit , AfterViewInit{
     //console.log("unlike " +unlike + "id "+id );
     let copyOfVideo = {...this.getCurrentVideo (id)};
     copyOfVideo.unlike = unlike;
-    this.awesomePlayer.playlist[id-1] = copyOfVideo;
+    this.awesomePlayer.playlist[id] = copyOfVideo;
     this.VideoPlayListService.updateVideo(copyOfVideo);
     
   }
