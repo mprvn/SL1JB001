@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Spring Security Assignment</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	/*<![CDATA[*/
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : "/captcha",
+					success : function(result) {
+
+						console.log("" + result);
+						$("#captchaImg").attr("src",
+								"data:image/jpeg;base64," + result);
+
+					}
+				});
+
+				$(document).on(
+						"click",
+						"a[id='captchaRefresh']",
+						function(e) {
+							$
+									.ajax({
+										url : "/captcha",
+										success : function(result) {
+											$("#captchaImg").attr(
+													"src",
+													"data:image/jpeg;base64,"
+															+ result);
+										}
+									});
+						});
+			});
+	/*]]>*/
+</script>
+</head>
+
+<body>
+	<th:block th:include="/menu"></th:block>
+
+	<div class="container">
+		<form th:action="@{/login}" method="POST" class="form-signin">
+			<h3 class="form-signin-heading" th:text="Welcome"></h3>
+			<br /> <input type="text" id="userName" name="userName"
+				th:placeholder="UserName" class="form-control" /> <br /> <input
+				type="password" th:placeholder="Password" id="password"
+				name="password" class="form-control" /> <br />
+
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">User Name or Password
+					invalid, please verify</p>
+			</div>
+			<div class="row" style="padding-bottom:20 px;">
+				<div class="col-sm-12" >
+					<img id="captchaImg" src="data:image/jpeg;base64,/captcha"> <a
+						id="captchaRefresh" class="fa fa-refresh btn captchaRefresh"
+						style="height: 40px; margin-left: -12px;"></a> 
+						
+						<input type="text"
+						name="captcha" required="required"
+						style="width: 35%; margin-left: -2px; height:40px;" placeholder="captcha"
+						class="">
+				</div>
+				
+				</div>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<button class="btn btn-lg btn-primary btn-block" id="login"
+							name="Submit" value="Login" type="Submit" th:text="Login"></button>
+					</div>
+					<div  class="col-sm-6">
+					   <button class="btn btn-lg btn-primary btn-block" name="reset" value="Reset" onClick="$('form :input').val('');">Reset</button>
+					
+					</div>
+					
+				</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+ 
+  <a th:href="@{/}">Home</a>
+ 
+     | &nbsp;
+  
+   <a  th:href="@{/registration}">Register</a>
+ 	<span th:if="${#request.userPrincipal != null}"> 
+     | &nbsp;
+  
+   <a th:if="${#request.userPrincipal != null}" th:href="@{/user/tutorials}">Tutorials</a>
+  
+     | &nbsp;
+  
+ <span sec:authorize="hasRole('ADMIN')">
+   <a  th:href="@{/admin/adminHome}">Admin</a>
+    
+     | &nbsp;
+     </span> 
+   <a  th:href="@{/logout}">Logout</a>
+  </span>
+</div>

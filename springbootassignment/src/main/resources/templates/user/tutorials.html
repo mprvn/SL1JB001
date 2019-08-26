@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+
+		<th:block th:include="/menu"></th:block>
+		<div class="panel-group" style="margin-top: 40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span th:utext="${userName}"></span>
+				</div>
+				<div class="panel-body">
+					<dl>
+						<dt>Firefox</dt>
+						<dt>Mozilla Firefox</dt>
+						<dt>Fx</dt>
+						<dd>A free, open source, cross-platform, graphical web
+							browser developed by the Mozilla Corporation and hundreds of
+							volunteers.</dd>
+						<dd>The Red Panda also known as the Lesser Panda, Wah, Bear
+							Cat or Firefox, is a mostly herbivorous mammal, slightly larger
+							than a domestic cat (60 cm long).</dd>
+
+
+						<!-- Other terms and descriptions -->
+					</dl>
+					<dl>
+						<div>
+							<dt>Name</dt>
+							<dd>Godzilla</dd>
+						</div>
+						<div>
+							<dt>Born</dt>
+							<dd>1952</dd>
+						</div>
+						<div>
+							<dt>Birthplace</dt>
+							<dd>Japan</dd>
+						</div>
+						<div>
+							<dt>Color</dt>
+							<dd>Green</dd>
+						</div>
+					</dl>
+				</div>
+				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
